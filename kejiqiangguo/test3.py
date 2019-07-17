@@ -4,7 +4,7 @@
 # @Author: Cheng Yili
 # @Date: 2019-07-16 22:23:08
 # @LastEditors: Cheng Yili
-# @LastEditTime: 2019-07-17 21:24:14
+# @LastEditTime: 2019-07-17 22:18:19
 # @Email: julywaltz77@hotmail.com
 
 # -*- coding: utf-8 -*-
@@ -202,14 +202,16 @@ def startLearn(driver, url):
 
 
 if __name__ == "__main__":
+    print('欢迎食用~')
     if 'config.yaml' not in os.listdir(os.getcwd()):
         print(os.getcwd())
         theFirstTimeLogin()
     url = 'https://pc.xuexi.cn/points/my-points.html'
     driver = webdriver.Firefox()
-    startLearn(driver, url)
-    driver.quit()
-    """ except:
+    try:
+        startLearn(driver, url)
+        driver.quit()
+    except:
         time.sleep(10)
         startLearn(driver, url)
-        driver.quit() """
+        driver.quit()
