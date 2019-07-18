@@ -543,3 +543,23 @@ console.error: BroadcastService:
     remoteSettingsFunction/remoteSettings.pollChanges@resource://services-settings/remote-settings.js:201:13
 
 WebGL(0000022B95366000)::ForceLoseContext
+WebGL(0000022B953D4000)::ForceLoseContext
+WebGL(0000022B9E3D4800)::ForceLoseContext
+WebGL(0000018CF0F25800)::ForceLoseContext
+WebGL(0000022B95364000)::ForceLoseContext
+WebGL(0000022B945D5000)::ForceLoseContext
+WebGL(0000022BA7715000)::ForceLoseContext
+WebGL(0000018C8CDC4800)::ForceLoseContext
+WebGL(0000022B953DC800)::ForceLoseContext
+[Parent 28048, Gecko_IOThread] WARNING: pipe error: 109: file z:/task_1562361253/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 341
+[Parent 28048, Gecko_IOThread] WARNING: pipe error: 109: file z:/task_1562361253/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 341
+[Child 28088, Chrome_ChildThread] WARNING: pipe error: 109: file z:/task_1562361253/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 341
+[Child 30268, Chrome_ChildThread] WARNING: pipe error: 232: file z:/task_1562361253/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 502
+[Child 30268, Chrome_ChildThread] WARNING: pipe error: 109: file z:/task_1562361253/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 341
+[Child 30268, Chrome_ChildThread] WARNING: pipe error: 109: file z:/task_1562361253/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line1563453972175	Marionette	INFO	Stopped listening on port 55423
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+[GPU 2
+###!!! [Child][MessageChannel::SendAndWait] Error: Channel error: cannot send/recv
+
