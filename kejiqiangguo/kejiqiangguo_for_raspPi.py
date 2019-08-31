@@ -4,7 +4,7 @@
 # @Author: Cheng Yili
 # @Date: 2019-07-16 22:23:08
 # @LastEditors: Cheng Yili
-# @LastEditTime: 2019-08-31 22:22:46
+# @LastEditTime: 2019-08-31 22:45:14
 # @Email: julywaltz77@hotmail.com
 
 # -*- coding: utf-8 -*-
@@ -15,77 +15,24 @@
 # @Last Modified time: 2019-07-15 22:01:09
 
 from selenium import webdriver
+from selenium.webdriver.chrome.options import Options
 import time
-import yaml
 import os
 from random import randint, choice, sample
-from selenium import webdriver
 import time
-"""首次登陆需要根据提示扫码从而获取cookies并保存在本地"""
-
-
-def theFirstTimeLogin(url, driver):
-    driver.get(url)
-    driver.maximize_window()
-    time.sleep(2)
-    cookieBefore = driver.get_cookies()
-    driver.execute_script("document.documentElement.scrollTop=2000")
-    # 打印登录前的cookie
-    # 加一个休眠，这样得到的cookie 才是登录后的cookie,否则可能打印的还是登录前的cookie
-    print('请扫码')
-    time.sleep(15)
-    # 获取登陆后的cookies
-    print("登陆成功")
-    getCookies(driver)
-
-
-"""获取cookis并写入config.yaml文件"""
-
-
-def getCookies(driver):
-    print('获取cookies')
-    cookiesNew = driver.get_cookies()
-    print('获取结束')
-    print('开始写入')
-    # 获取当前文件所在路径
-    fileNamePath = os.path.split(os.path.realpath(__file__))[0]
-    # 拼接config.yaml文件绝对路径
-    yamlPath = os.path.join(fileNamePath, 'config.yaml')
-    fw = open(yamlPath, 'w', encoding='utf-8')
-    # 构建数据
-    yaml.dump(cookiesNew, fw)
-    print('写入结束')
-
-
-"""自动登陆后重新获取cookie并覆盖写入config.ymal文件"""
-
-
-def login(url, driver):
-    print('登陆中，请稍后!')
-    driver.maximize_window()
-    # 清除一下cookie
-    driver.delete_all_cookies()
-    time.sleep(3)
-    driver.get(url)
-    fileNamePath = os.path.split(os.path.realpath(__file__))[0]
-    yamlPath = os.path.join(fileNamePath, 'config.yaml')
-    # 读取yaml 文件
-    f = open(yamlPath, 'r', encoding='utf-8')
-    cont = f.read()
-    cookies = yaml.load(cont)
-    # 读取cookie值
-    for cookie in cookies:
-        driver.add_cookie(cookie)
-        time.sleep(2)
-    # 刷新查看登录状态
-    driver.refresh()
-    time.sleep(5)
 
 
 """自动开始学习保证15分"""
 
 
 def startLearn(driver, url):
+    driver.get(url)
+    driver.maximize_window()
+    time.sleep(2)
+    driver.execute_script("document.documentElement.scrollTop=2000")
+    print('请扫码')
+    time.sleep(15)
+    print("登陆成功")
     time.sleep(randint(2, 3))
     print('跳转中')
     if driver.find_element_by_xpath(
@@ -206,56 +153,31 @@ def startLearn(driver, url):
                     driver.switch_to.window(allhandles[-1])
     else:
         pass
-    getCookies(driver)
     driver.quit()
 
 
 if __name__ == "__main__":
     print('欢迎食用~')
     url = 'https://pc.xuexi.cn/points/my-points.html'
-    driver = webdriver.Firefox()
+    chrome_options = Options()
+    driver = webdriver.Chrome(chrome_options=chrome_options,
+                              executable_path="/usr/bin/chromedriver")
     try:
-        if 'config.yaml' not in os.listdir(os.getcwd()):
-            print(os.getcwd())
-            theFirstTimeLogin(url, driver)
-        else:
-            login(url, driver)
         startLearn(driver, url)
     except:
         print('程序出错，自动重启中')
         try:
-            if 'config.yaml' not in os.listdir(os.getcwd()):
-                print(os.getcwd())
-                theFirstTimeLogin(url, driver)
-            else:
-                login(url, driver)
             startLearn(driver, url)
         except:
             print('程序出错，自动重启中')
             try:
-                if 'config.yaml' not in os.listdir(os.getcwd()):
-                    print(os.getcwd())
-                    theFirstTimeLogin(url, driver)
-                else:
-                    login(url, driver)
                 startLearn(driver, url)
             except:
                 print('程序出错，自动重启中')
                 try:
-                    if 'config.yaml' not in os.listdir(os.getcwd()):
-                        print(os.getcwd())
-                        theFirstTimeLogin(url, driver)
-                    else:
-                        login(url, driver)
                     startLearn(driver, url)
                 except:
                     print('程序出错，自动重启中')
-                    if 'config.yaml' not in os.listdir(os.getcwd()):
-                        print(os.getcwd())
-                        theFirstTimeLogin(url, driver)
-                    else:
-                        login(url, driver)
                     startLearn(driver, url)
     finally:
         print('程序关闭！')
-        os.remove(os.getcwd() + '/config.yaml')
