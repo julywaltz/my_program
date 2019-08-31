@@ -4,7 +4,7 @@
 # @Author: Cheng Yili
 # @Date: 2019-07-16 22:23:08
 # @LastEditors: Cheng Yili
-# @LastEditTime: 2019-08-31 22:45:14
+# @LastEditTime: 2019-08-31 23:04:06
 # @Email: julywaltz77@hotmail.com
 
 # -*- coding: utf-8 -*-
@@ -20,8 +20,6 @@ import time
 import os
 from random import randint, choice, sample
 import time
-
-
 """自动开始学习保证15分"""
 
 
@@ -45,6 +43,7 @@ def startLearn(driver, url):
         print("跳转中")
         driver.switch_to.window(allhandles[-1])
         driver.implicitly_wait(randint(5, 6))
+        driver.execute_script("document.documentElement.scrollTop=1000")
         driver.find_element_by_xpath(
             ".//span[contains(text(),'学习时评')]").click()
         time.sleep(randint(2, 3))
@@ -96,6 +95,7 @@ def startLearn(driver, url):
         time.sleep(randint(2, 4))
         allhandles = driver.window_handles
         driver.switch_to.window(allhandles[-1])
+        driver.execute_script("document.documentElement.scrollTop=1500")
         driver.find_element_by_link_text("学习电视台").click()
         allhandles = driver.window_handles
         driver.switch_to.window(allhandles[-1])
@@ -167,16 +167,20 @@ if __name__ == "__main__":
     except:
         print('程序出错，自动重启中')
         try:
+            driver.close()
             startLearn(driver, url)
         except:
             print('程序出错，自动重启中')
             try:
+                driver.close()
                 startLearn(driver, url)
             except:
                 print('程序出错，自动重启中')
                 try:
+                    driver.close()
                     startLearn(driver, url)
                 except:
+                    driver.close()
                     print('程序出错，自动重启中')
                     startLearn(driver, url)
     finally:
