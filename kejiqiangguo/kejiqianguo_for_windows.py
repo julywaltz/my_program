@@ -2,17 +2,10 @@
 # -*- coding=utf-8 -*-
 
 # @Author: Cheng Yili
-# @Date: 2019-07-16 22:23:08
+# @Date: 2019-09-10 22:31:58
 # @LastEditors: Cheng Yili
-# @LastEditTime: 2019-07-16 23:59:00
+# @LastEditTime: 2019-09-10 22:31:58
 # @Email: julywaltz77@hotmail.com
-
-# -*- coding: utf-8 -*-
-# @Author: Cheng Yili
-# @Date:   2019-07-15 20:16:12
-# @Email:  julywaltz77@hotmail.com
-# @Last Modified by:   Cheng Yili
-# @Last Modified time: 2019-07-15 22:01:09
 
 from selenium import webdriver
 import time
@@ -172,7 +165,7 @@ def startLearn():
 
 if __name__ == "__main__":
     if 'config.yaml' not in os.listdir(os.getcwd()):
-      print(os.listdir(os.getcwd()))
-      """ theFirstTimeLogin()
+        print(os.listdir(os.getcwd()))
+        """ theFirstTimeLogin()
     else:
       startLearn() """
